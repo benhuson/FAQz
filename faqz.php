@@ -170,32 +170,43 @@ class FAQz {
 	 * Shortcode: [faq /]
 	 */
 	function shortcode_faqz( $atts, $content = '' ) {
-		$atts = shortcode_atts( array(
-			'limit'   => -1,
-			'orderby' => 'menu_order',
-			'order'   => 'ASC',
-			'context' => 'shortcode'
-		), $atts );
+		$atts = wp_parse_args( $atts, array(
+			'faqz_context' => 'shortcode'
+		) );
+		return $content . $this->faqz_list( $atts );
+	}
+	
+	/**
+	 * FAQz List
+	 */
+	function faqz_list( $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'posts_per_page'   => -1,
+			'orderby'          => 'menu_order',
+			'order'            => 'ASC',
+			'faqz_context'     => 'list',
+			'faqz_before'      => '<div class="faqz-faqs">',
+			'faqz_after'       => '</div>',
+			'faqz_before_item' => '<div class="faqz-faq">',
+			'faqz_after_item'  => '</div>'
+		) );
+		$args['post_type'] = 'faqz';
 		
 		$faqs = '';
-		$faqs_query = new WP_Query( array(
-			'post_type' => 'faqz',
-			'orderby'   => $atts['orderby'],
-			'order'     => $atts['order']
-		) );
+		$faqs_query = new WP_Query( $args );
 		if ( $faqs_query->have_posts() ) {
 			while ( $faqs_query->have_posts() ) {
 				$faqs_query->the_post();
-				$faq = '<h3 class="faqz-question">' . get_the_title() . '</h3>';
+				$faq = '<h3 class="faqz-question"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
 				$faq .= '<div class="faqz-answer">' . get_the_content() . '</div>';
-				$faqs .= '<div class="faqz-faq">' . apply_filters( 'faqz_loop', $faq, $atts ) . '</div>';
+				$faqs .= $args['faqz_before_item'] . apply_filters( 'faqz_loop', $faq, $args ) . $args['faqz_after_item'];
 			}
 			wp_reset_postdata();
 		}
 		if ( ! empty( $faqs ) ) {
-			$faqs = '<div class="faqz-faqs">' . $faqs . '</div>';
+			$faqs = $args['faqz_before'] . $faqs . $args['faqz_after'];
 		}
-		return $content . $faqs;
+		return $faqs;
 	}
 	
 	/**
@@ -219,6 +230,11 @@ class FAQz {
 global $faqz;
 $faqz = new FAQz();
 register_activation_hook( __FILE__, array( $faqz, 'register_activation' ) );
+
+function faqz_list( $args = null ) {
+	global $faqz;
+	return $faqz->faqz_list( $args );
+}
 
 function faqz_get_search_form( $echo = true ) {
 	global $faqz;
