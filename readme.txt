@@ -1,4 +1,4 @@
-=== FAQ ===
+=== FAQz ===
 Contributors: husobj
 Donate link: http://www.benhuson.co.uk/donate/
 Tags: faq, faqs, questions, answers, knowledgebase
@@ -16,14 +16,14 @@ This plugin is designed to be a simple solid base for managing an FAQ section on
 
 It consists of:
 
-* A simple FAQ post type
-* [faqs /] shortcode
-* FAQs search widget
-* FAQs search form template tag
+* A simple 'faqz' post type
+* [faqz /] shortcode
+* FAQ search widget
+* FAQ search form template tag
 
 == Installation ==
 
-1. Upload the `faq` folder to the `/wp-content/plugins/` directory
+1. Upload the `faqz` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
@@ -34,8 +34,8 @@ This is just a first release. More to come...
 
 == Screenshots ==
 
-1. FAQs custom post type
-2. FAQs search widget
+1. FAQz custom post type
+2. FAQ search widget
 
 == Changelog ==
 

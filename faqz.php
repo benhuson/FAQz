@@ -1,8 +1,8 @@
 <?php 
 
 /*
-Plugin Name: FAQ
-Plugin URI: https://github.com/benhuson/FAQ
+Plugin Name: FAQz
+Plugin URI: https://github.com/benhuson/FAQz
 Description: Simple management of Frequently Asked Questions (FAQ).
 Version: 0.1
 Author: Ben Huson
@@ -27,7 +27,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-class FAQ {
+class FAQz {
 
     protected $plugin_dir;
     protected $plugin_subdir;
@@ -52,7 +52,7 @@ class FAQ {
 		add_action( 'template_redirect', array( $this, 'template_redirect' ) );
 		add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
 		add_filter( 'cmspo_post_types', array( $this, 'cmspo_post_types' ) );
-		add_shortcode( 'faq', array( $this, 'shortcode_faq' ) );
+		add_shortcode( 'faqz', array( $this, 'shortcode_faqz' ) );
 	}
 	
 	/**
@@ -60,7 +60,7 @@ class FAQ {
 	 */
 	function register_post_types() {
 		$labels = array(
-			'name'               => _x( 'FAQs', 'Post type general name', 'faq' ),
+			'name'               => _x( 'FAQz', 'Post type general name', 'faq' ),
 			'singular_name'      => _x( 'FAQ', 'Post type singular name', 'faq' ),
 			'add_new'            => _x( 'Add New', 'book', 'faq' ),
 			'add_new_item'       => __( 'Add New FAQ', 'faq' ),
@@ -72,7 +72,7 @@ class FAQ {
 			'not_found'          => __( 'No FAQs found', 'faq' ),
 			'not_found_in_trash' => __( 'No FAQs found in Trash', 'faq' ), 
 			'parent_item_colon'  => '',
-			'menu_name'          => __( 'FAQs', 'faq' )
+			'menu_name'          => __( 'FAQz', 'faq' )
 		);
 		$args = array(
 			'labels'             => $labels,
@@ -81,7 +81,7 @@ class FAQ {
 			'show_ui'            => true, 
 			'show_in_menu'       => true, 
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => _x( 'faq', 'Single URL slug', 'faq' ) ),
+			'rewrite'            => array( 'slug' => _x( 'faqz', 'Single URL slug', 'faqz' ) ),
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
@@ -89,8 +89,8 @@ class FAQ {
 			'menu_icon'          => $this->plugin_url . '/images/icon.png',
 			'supports'           => array( 'title', 'editor', 'author', 'excerpt' )
 		);
-		$args = apply_filters( 'faq_register_post_type_args', $args );
-		register_post_type( 'faq', $args );
+		$args = apply_filters( 'faqz_register_post_type_args', $args );
+		register_post_type( 'faqz', $args );
 	}
 
 	/**
@@ -99,21 +99,21 @@ class FAQ {
 	function post_updated_messages( $messages ) {
 		global $post, $post_ID;
 		
-		$messages['faq'] = array(
+		$messages['faqz'] = array(
 			0 => '', // Unused. Messages start at index 1.
-			1 => sprintf( __( 'FAQ updated. <a href="%s">View FAQ</a>', 'faq' ), esc_url( get_permalink( $post_ID ) ) ),
-			2 => __( 'Custom field updated.', 'faq' ),
-			3 => __( 'Custom field deleted.', 'faq' ),
-			4 => __( 'FAQ updated.', 'faq' ),
+			1 => sprintf( __( 'FAQ updated. <a href="%s">View FAQ</a>', 'faqz' ), esc_url( get_permalink( $post_ID ) ) ),
+			2 => __( 'Custom field updated.', 'faqz' ),
+			3 => __( 'Custom field deleted.', 'faqz' ),
+			4 => __( 'FAQ updated.', 'faqz' ),
 			/* translators: %s: date and time of the revision */
-			5 => isset( $_GET['revision'] ) ? sprintf( __( 'FAQ restored to revision from %s', 'faq' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6 => sprintf( __( 'FAQ published. <a href="%s">View FAQ</a>', 'faq' ), esc_url( get_permalink( $post_ID ) ) ),
+			5 => isset( $_GET['revision'] ) ? sprintf( __( 'FAQ restored to revision from %s', 'faqz' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6 => sprintf( __( 'FAQ published. <a href="%s">View FAQ</a>', 'faqz' ), esc_url( get_permalink( $post_ID ) ) ),
 			7 => __( 'FAQ saved.', 'faq' ),
-			8 => sprintf( __( 'FAQ submitted. <a target="_blank" href="%s">Preview FAQ</a>', 'faq' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
-			9 => sprintf( __( 'FAQ scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview FAQ</a>', 'faq' ),
+			8 => sprintf( __( 'FAQ submitted. <a target="_blank" href="%s">Preview FAQ</a>', 'faqz' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+			9 => sprintf( __( 'FAQ scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview FAQ</a>', 'faqz' ),
 			// translators: Publish box date format, see http://php.net/date
 			date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
-			10 => sprintf( __( 'FAQ draft updated. <a target="_blank" href="%s">Preview FAQ</a>', 'faq' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+			10 => sprintf( __( 'FAQ draft updated. <a target="_blank" href="%s">Preview FAQ</a>', 'faqz' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
 		);
 		
 		return $messages;
@@ -124,7 +124,7 @@ class FAQ {
 	 * http://wordpress.org/extend/plugins/cms-page-order/
 	 */
 	function cmspo_post_types( $post_types ) {
-		$post_types[] = 'faq';
+		$post_types[] = 'faqz';
 		return $post_types;
 	}
 	
@@ -132,8 +132,8 @@ class FAQ {
 	 * Template Redirect
 	 */
 	function template_redirect() {
-		if ( is_search() && ( is_post_type_archive( 'faq' ) || ( is_archive() && 'faq' == get_post_type() ) ) ) {
-			$search_template = locate_template( 'search-faq.php' );
+		if ( is_search() && ( is_post_type_archive( 'faqz' ) || ( is_archive() && 'faqz' == get_post_type() ) ) ) {
+			$search_template = locate_template( 'search-faqz.php' );
 			if ( '' != $search_template ) {
 				require( $search_template );
 				exit;
@@ -145,31 +145,31 @@ class FAQ {
 	 * Get Search Form
 	 */
 	function get_search_form( $echo = true ) {
-		do_action( 'faq_get_search_form' );
+		do_action( 'faqz_get_search_form' );
 	
-		$search_form_template = locate_template( 'searchform-faq.php' );
+		$search_form_template = locate_template( 'searchform-faqz.php' );
 		if ( '' != $search_form_template ) {
 			require( $search_form_template );
 			return;
 		}
 	
-		$form = '<form role="search" method="get" id="faq-searchform" action="' . esc_url( get_post_type_archive_link( 'faq' ) ) . '" >
-		<div><label class="screen-reader-text" for="faq-s">' . __( 'Search for:', 'faq' ) . '</label>
-		<input type="text" value="' . get_search_query() . '" name="s" id="faq-s" />
-		<input type="submit" id="faqs-searchsubmit" value="'. esc_attr__( 'Search', 'faq' ) .'" />
+		$form = '<form role="search" method="get" id="faqz-searchform" action="' . esc_url( get_post_type_archive_link( 'faqz' ) ) . '" >
+		<div><label class="screen-reader-text" for="faqz-s">' . __( 'Search for:', 'faqz' ) . '</label>
+		<input type="text" value="' . get_search_query() . '" name="s" id="faqz-s" />
+		<input type="submit" id="faqz-searchsubmit" value="'. esc_attr__( 'Search', 'faqz' ) .'" />
 		</div>
 		</form>';
 	
 		if ( $echo )
-			echo apply_filters( 'faq_get_search_form', $form );
+			echo apply_filters( 'faqz_get_search_form', $form );
 		else
-			return apply_filters( 'faq_get_search_form', $form );
+			return apply_filters( 'faqz_get_search_form', $form );
 	}
 	
 	/**
 	 * Shortcode: [faq /]
 	 */
-	function shortcode_faq( $atts, $content = '' ) {
+	function shortcode_faqz( $atts, $content = '' ) {
 		$atts = shortcode_atts( array(
 			'limit'   => -1,
 			'orderby' => 'menu_order',
@@ -179,21 +179,21 @@ class FAQ {
 		
 		$faqs = '';
 		$faqs_query = new WP_Query( array(
-			'post_type' => 'faq',
+			'post_type' => 'faqz',
 			'orderby'   => $atts['orderby'],
 			'order'     => $atts['order']
 		) );
 		if ( $faqs_query->have_posts() ) {
 			while ( $faqs_query->have_posts() ) {
 				$faqs_query->the_post();
-				$faq = '<h3 class="faq-question">' . get_the_title() . '</h3>';
-				$faq .= '<div class="faq-answer">' . get_the_content() . '</div>';
-				$faqs .= '<div class="faq-faq">' . apply_filters( 'faq_loop', $faq, $atts ) . '</div>';
+				$faq = '<h3 class="faqz-question">' . get_the_title() . '</h3>';
+				$faq .= '<div class="faqz-answer">' . get_the_content() . '</div>';
+				$faqs .= '<div class="faqz-faq">' . apply_filters( 'faqz_loop', $faq, $atts ) . '</div>';
 			}
 			wp_reset_postdata();
 		}
 		if ( ! empty( $faqs ) ) {
-			$faqs = '<div class="faq-faqs">' . $faqs . '</div>';
+			$faqs = '<div class="faqz-faqs">' . $faqs . '</div>';
 		}
 		return $content . $faqs;
 	}
@@ -202,7 +202,7 @@ class FAQ {
 	 * Load Text Domain Language Support
 	 */
 	function load_textdomain() {
-		load_plugin_textdomain( 'faq', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'faqz', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 	
 	/**
@@ -216,13 +216,13 @@ class FAQ {
 	
 }
 
-global $faq;
-$faq = new FAQ();
-register_activation_hook( __FILE__, array( $faq, 'register_activation' ) );
+global $faqz;
+$faqz = new FAQz();
+register_activation_hook( __FILE__, array( $faqz, 'register_activation' ) );
 
-function faq_get_search_form( $echo = true ) {
-	global $faq;
-	return $faq->get_search_form( $echo );
+function faqz_get_search_form( $echo = true ) {
+	global $faqz;
+	return $faqz->get_search_form( $echo );
 }
 
 ?>

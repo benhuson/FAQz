@@ -1,16 +1,16 @@
 <?php
 
 /**
- * FAQs search widget class
+ * FAQz search widget class
  */
-class FAQ_Widget_Search extends WP_Widget {
+class FAQz_Widget_Search extends WP_Widget {
 
 	function __construct() {
 		$widget_ops = array(	
-			'classname'   => 'faq_widget_search',
-			'description' => __( 'An FAQ search form', 'faq' )
+			'classname'   => 'faqz-widget-search',
+			'description' => __( 'An FAQ search form', 'faqz' )
 		);
-		parent::__construct( 'faq_search', __( 'FAQ Search', 'faq' ), $widget_ops );
+		parent::__construct( 'faqz_search', __( 'FAQz Search', 'faqz' ), $widget_ops );
 	}
 
 	function widget( $args, $instance ) {
@@ -31,7 +31,7 @@ class FAQ_Widget_Search extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, array( 'title' => '' ) );
 		$title = $instance['title'];
 		?>
-		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'faq' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></label></p>
+		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'faqz' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></label></p>
 		<?php
 	}
 
@@ -45,12 +45,12 @@ class FAQ_Widget_Search extends WP_Widget {
 }
 
 /**
- * Register FAQs widgets.
+ * Register FAQz widgets.
  */
-function faq_widgets_init() {
-	register_widget( 'FAQ_Widget_Search' );
+function faqz_widgets_init() {
+	register_widget( 'FAQz_Widget_Search' );
 }
 
-add_action( 'widgets_init', 'faq_widgets_init' );
+add_action( 'widgets_init', 'faqz_widgets_init' );
 
 ?>
