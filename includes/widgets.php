@@ -22,7 +22,7 @@ class FAQz_Widget_Search extends WP_Widget {
 			echo $before_title . $title . $after_title;
 
 		// Use current theme search form if it exists
-		faq_get_search_form();
+		faqz_get_search_form();
 
 		echo $after_widget;
 	}
