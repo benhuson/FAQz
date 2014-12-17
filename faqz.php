@@ -4,7 +4,7 @@
 Plugin Name: FAQz
 Plugin URI: https://github.com/benhuson/FAQz
 Description: Simple management of Frequently Asked Questions (FAQ).
-Version: 0.1
+Version: 0.2
 Author: Ben Huson
 Author URI: https://github.com/benhuson/
 License: GPL2
