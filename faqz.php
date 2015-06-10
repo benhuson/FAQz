@@ -88,7 +88,7 @@ class FAQz {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'menu_icon'          => $this->plugin_url . '/images/icon.png',
+			'menu_icon'          => 'dashicons-format-chat',
 			'supports'           => array( 'title', 'editor', 'author', 'excerpt' )
 		);
 
