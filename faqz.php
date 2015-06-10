@@ -83,7 +83,10 @@ class FAQz {
 			'show_ui'            => true, 
 			'show_in_menu'       => true, 
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => _x( 'faqz', 'Single URL slug', 'faqz' ) ),
+			'rewrite'            => array(
+				'slug'       => _x( 'faqz', 'Single URL slug', 'faqz' ),
+				'with_front' => false
+			),
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
