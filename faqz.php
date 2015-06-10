@@ -123,7 +123,10 @@ class FAQz {
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'faqz-category' ),
+			'rewrite'           => array(
+				'slug'       => 'faqz-category',
+				'with_front' => false
+			),
 		);
 
 		register_taxonomy( 'faqz_category', array( 'faqz' ), apply_filters( 'faqz_register_taxonomy_args', $args ) );
