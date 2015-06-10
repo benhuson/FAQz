@@ -119,6 +119,7 @@ class FAQz {
 				'new_item_name'     => __( 'New Category Name' ),
 				'menu_name'         => __( 'Category' ),
 			),
+			'public'            => true,
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
