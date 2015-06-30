@@ -64,7 +64,7 @@ class FAQz {
 
 		$args = array(
 			'labels'             => array(
-				'name'               => _x( 'FAQz', 'Post type general name', 'faq' ),
+				'name'               => _x( 'FAQs', 'Post type general name', 'faq' ),
 				'singular_name'      => _x( 'FAQ', 'Post type singular name', 'faq' ),
 				'add_new'            => _x( 'Add New', 'book', 'faq' ),
 				'add_new_item'       => __( 'Add New FAQ', 'faq' ),
@@ -76,7 +76,7 @@ class FAQz {
 				'not_found'          => __( 'No FAQs found', 'faq' ),
 				'not_found_in_trash' => __( 'No FAQs found in Trash', 'faq' ), 
 				'parent_item_colon'  => '',
-				'menu_name'          => __( 'FAQz', 'faq' )
+				'menu_name'          => __( 'FAQs', 'faq' )
 			),
 			'public'             => true,
 			'publicly_queryable' => true,
