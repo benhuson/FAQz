@@ -2,7 +2,7 @@
 Contributors: husobj
 Donate link: https://www.paypal.com/ncp/payment/P64UGJHU5MZVE
 Tags: faq, faqs, questions, answers, knowledgebase
-Requires at least: 3.5
+Requires at least: 4.7
 Tested up to: 6.9
 Stable tag: 1.0
 Requires PHP: 7.4
@@ -17,8 +17,8 @@ This plugin is designed to be a simple solid base for managing an FAQ section on
 
 It consists of:
 
-* A simple 'faqz' post type
-* [faqz /] shortcode
+* A simple 'faq' post type
+* [faqs /] shortcode
 * FAQ search widget
 * FAQ search form template tag
 
@@ -33,12 +33,29 @@ It consists of:
 
 This is just a first release. More to come...
 
+= Why so many breaking changes in version 2.0? =
+
+The main post type was changed to `faq` so the plugin is easier to migrate to/from other FAQ plugins. Front end CSS classes were changed to reflect this and follow a more predictable BEM format. Code and plugin hooks retained their `faqz` namespace. It is possible to reinstate some backward compatibility using the filters mentioned in the changelog and updating your template names and CSS files.
+
 == Screenshots ==
 
 1. FAQz custom post type
 2. FAQ search widget
 
 == Changelog ==
+
+= 2.0 =
+* Breaking Change: Post type `faqz` is now `faq`. Use `faqz_registered_post_type` filter for backwards compatibility.
+* Breaking Change: Taxonomy `faqz-category` is now `faq-category`. Use `faqz_registered_taxonomy` filter for backwards compatibility.
+* Breaking Change: Post type single and archive URL slug is now `faqs` instead of `faqz`. Use `register_faq_post_type_args` filter to change.
+* Breaking Change: Category URL slug is now `faq-category` instead of `faqz-category`. Use `register_faq-category_taxonomy_args` filter to change.
+* Breaking Change: `faqz` shortcode is now `faqs`.
+* Breaking Change: Removed `faqz_register_post_type_args` filter. Use `register_faq_post_type_args`.
+* Breaking Change: Removed `faqz_register_taxonomy_args` filter. Use `register_faq-category_taxonomy_args`.
+* Breaking Change: Optional template `search-faq.php` changed to `search-faqz.php`.
+* Breaking Change: Optional template `searchform-faqz.php` changed to `searchform-faq.php`.
+* Breaking Change: `faqz_context` arg removed from faqz_list() display method.
+* Breaking Change: CSS classes for search form and default FAQs output changed.
 
 = 1.0 =
 * Rename to "Frequently Asked Questions (FAQs).

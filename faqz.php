@@ -5,7 +5,7 @@ Plugin Name: Frequently Asked Questions (FAQs)
 Plugin URI: https://github.com/benhuson/FAQz
 Description: Simple management of Frequently Asked Questions (FAQ) via post type and categories.
 Version: 1.0
-Requires at least: 3.5
+Requires at least: 4.7
 Requires PHP: 7.4
 Author: Ben Huson
 Author URI: https://github.com/benhuson/
@@ -57,8 +57,7 @@ class FAQz {
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'template_redirect', array( $this, 'template_redirect' ) );
 		add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
-		add_filter( 'cmspo_post_types', array( $this, 'cmspo_post_types' ) );
-		add_shortcode( 'faqz', array( $this, 'shortcode_faqz' ) );
+		add_shortcode( 'faqs', array( $this, 'shortcode_faqs' ) );
 
 	}
 
@@ -89,7 +88,7 @@ class FAQz {
 			'show_in_menu'       => true, 
 			'query_var'          => true,
 			'rewrite'            => array(
-				'slug'       => _x( 'faqz', 'Single URL slug', 'faqz' ),
+				'slug'       => _x( 'faqs', 'Single URL slug', 'faqz' ),
 				'with_front' => false
 			),
 			'capability_type'    => 'post',
@@ -97,10 +96,10 @@ class FAQz {
 			'hierarchical'       => false,
 			'menu_position'      => null,
 			'menu_icon'          => 'dashicons-format-chat',
-			'supports'           => array( 'title', 'editor', 'author', 'excerpt' )
+			'supports'           => array( 'title', 'editor', 'author', 'page-attributes' )
 		);
 
-		register_post_type( 'faqz', apply_filters( 'faqz_register_post_type_args', $args ) );
+		register_post_type( $this->get_registered_post_type(), $args );
 
 	}
 
@@ -112,29 +111,29 @@ class FAQz {
 		$args = array(
 			'hierarchical'      => true,
 			'labels'            => array(
-				'name'              => _x( 'Categories', 'taxonomy general name', 'faqz' ),
-				'singular_name'     => _x( 'Category', 'taxonomy singular name', 'faqz' ),
-				'search_items'      => __( 'Search Categories', 'faqz' ),
-				'all_items'         => __( 'All Categories', 'faqz' ),
-				'parent_item'       => __( 'Parent Category', 'faqz' ),
-				'parent_item_colon' => __( 'Parent Category:', 'faqz' ),
-				'edit_item'         => __( 'Edit Category', 'faqz' ),
-				'update_item'       => __( 'Update Category', 'faqz' ),
-				'add_new_item'      => __( 'Add New Category', 'faqz' ),
-				'new_item_name'     => __( 'New Category Name', 'faqz' ),
-				'menu_name'         => __( 'Category', 'faqz' ),
+				'name'              => _x( 'FAQ Categories', 'taxonomy general name', 'faqz' ),
+				'singular_name'     => _x( 'FAQ Category', 'taxonomy singular name', 'faqz' ),
+				'search_items'      => __( 'Search FAQ Categories', 'faqz' ),
+				'all_items'         => __( 'All FAQ Categories', 'faqz' ),
+				'parent_item'       => __( 'Parent FAQ Category', 'faqz' ),
+				'parent_item_colon' => __( 'Parent FAQ Category:', 'faqz' ),
+				'edit_item'         => __( 'Edit FAQ Category', 'faqz' ),
+				'update_item'       => __( 'Update FAQ Category', 'faqz' ),
+				'add_new_item'      => __( 'Add New FAQ Category', 'faqz' ),
+				'new_item_name'     => __( 'New FAQ Category Name', 'faqz' ),
+				'menu_name'         => __( 'Categories', 'faqz' ),
 			),
 			'public'            => true,
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
 			'rewrite'           => array(
-				'slug'       => 'faqz-category',
+				'slug'       => 'faq-category',
 				'with_front' => false
 			),
 		);
 
-		register_taxonomy( 'faqz_category', array( 'faqz' ), apply_filters( 'faqz_register_taxonomy_args', $args ) );
+		register_taxonomy( $this->get_registered_taxonomy(), array( $this->get_registered_post_type() ), $args );
 
 	}
 
@@ -175,16 +174,24 @@ class FAQz {
 	}
 
 	/**
-	 * Support for CMS Page Order plugin
-	 * http://wordpress.org/extend/plugins/cms-page-order/
+	 * Get Registered Post Type
 	 *
-	 * @param   array  $post_types  Exisiting post type support.
-	 * @return  array               Updated post type support.
+	 * @return  string
 	 */
-	function cmspo_post_types( $post_types ) {
+	public function get_registered_post_type() {
 
-		$post_types[] = 'faqz';
-		return $post_types;
+		return sanitize_key( apply_filters( 'faqz_registered_post_type', 'faq' ) );
+
+	}
+
+	/**
+	 * Get Registered Taxonomy
+	 *
+	 * @return  string
+	 */
+	public function get_registered_taxonomy() {
+
+		return sanitize_key( apply_filters( 'faqz_registered_taxonomy', 'faq_category' ) );
 
 	}
 
@@ -193,9 +200,9 @@ class FAQz {
 	 */
 	public function template_redirect() {
 
-		if ( is_search() && ( is_post_type_archive( 'faqz' ) || ( is_archive() && 'faqz' == get_post_type() ) ) ) {
+		if ( is_search() && ( is_post_type_archive( 'faq' ) || ( is_archive() && 'faq' == get_post_type() ) ) ) {
 
-			$search_template = locate_template( 'search-faqz.php' );
+			$search_template = locate_template( 'search-faq.php' );
 
 			if ( '' != $search_template ) {
 				require( $search_template );
@@ -216,16 +223,16 @@ class FAQz {
 
 		do_action( 'faqz_get_search_form' );
 
-		$search_form_template = locate_template( 'searchform-faqz.php' );
-		if ( '' != $search_form_template ) {
+		$search_form_template = locate_template( 'searchform-faq.php' );
+		if ( '' !== $search_form_template ) {
 			require( $search_form_template );
 			return;
 		}
 
-		$form = '<form role="search" method="get" id="faqz-searchform" action="' . esc_url( get_post_type_archive_link( 'faqz' ) ) . '" >
-		<div><label class="screen-reader-text" for="faqz-s">' . __( 'Search for:', 'faqz' ) . '</label>
-		<input type="text" value="' . get_search_query() . '" name="s" id="faqz-s" />
-		<input type="submit" id="faqz-searchsubmit" value="'. esc_attr__( 'Search', 'faqz' ) .'" />
+		$form = '<form role="search" method="get" id="faq-searchform" class="faq-searchform" action="' . esc_url( get_post_type_archive_link( 'faq' ) ) . '" >
+		<div><label class="screen-reader-text" for="faq-searchform-s">' . __( 'Search for:', 'faqz' ) . '</label>
+		<input type="text" value="' . esc_attr( get_search_query() ) . '" name="s" id="faq-searchform-s" />
+		<input type="submit" id="faq-searchform-submit" value="'. esc_attr__( 'Search', 'faqz' ) .'" />
 		</div>
 		</form>';
 
@@ -240,17 +247,15 @@ class FAQz {
 	}
 
 	/**
-	 * Shortcode: [faq /]
+	 * Shortcode: [faqs /]
 	 *
 	 * @param   array   $atts     Shortcode attributes.
 	 * @param   string  $content  Default content.
 	 * @return  string            Content.
 	 */
-	public function shortcode_faqz( $atts, $content = '' ) {
+	public function shortcode_faqs( $atts, $content = '', $shortcode_tag = '' ) {
 
-		$atts = wp_parse_args( $atts, array(
-			'faqz_context' => 'shortcode'
-		) );
+		$atts = wp_parse_args( $atts, array() );
 
 		return $content . $this->faqz_list( $atts );
 
@@ -269,13 +274,12 @@ class FAQz {
 			'posts_per_page'   => -1,
 			'orderby'          => 'menu_order',
 			'order'            => 'ASC',
-			'faqz_context'     => 'list',
-			'faqz_before'      => '<div class="faqz-faqs">',
+			'faqz_before'      => '<div class="faqs">',
 			'faqz_after'       => '</div>',
-			'faqz_before_item' => '<div class="faqz-faq">',
+			'faqz_before_item' => '<div class="faq">',
 			'faqz_after_item'  => '</div>'
 		) );
-		$args['post_type'] = 'faqz';
+		$args['post_type'] = $this->get_registered_post_type();
 
 		$faqs = '';
 		$faqs_query = new WP_Query( $args );
@@ -285,8 +289,8 @@ class FAQz {
 			while ( $faqs_query->have_posts() ) {
 				$faqs_query->the_post();
 
-				$faq = '<h3 class="faqz-question"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
-				$faq .= '<div class="faqz-answer">' . get_the_content() . '</div>';
+				$faq = '<h3 class="faq__question"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
+				$faq .= '<div class="faq__answer">' . get_the_content() . '</div>';
 				$faqs .= $args['faqz_before_item'] . apply_filters( 'faqz_loop', $faq, $args ) . $args['faqz_after_item'];
 
 			}
