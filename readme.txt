@@ -1,4 +1,4 @@
-=== FAQz ===
+=== Frequently Asked Questions (FAQs) ===
 Contributors: husobj
 Donate link: https://www.paypal.com/ncp/payment/P64UGJHU5MZVE
 Tags: faq, faqs, frequently asked questions, questions, answers, knowledgebase

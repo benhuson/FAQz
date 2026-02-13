@@ -1,7 +1,7 @@
 <?php 
 
 /*
-Plugin Name: FAQz
+Plugin Name: Frequently Asked Questions (FAQs)
 Plugin URI: https://github.com/benhuson/FAQz
 Description: Simple management of Frequently Asked Questions (FAQ) via post type and categories.
 Version: 0.3
