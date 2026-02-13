@@ -1,14 +1,15 @@
 === FAQz ===
 Contributors: husobj
-Donate link: http://www.benhuson.co.uk/donate/
-Tags: faq, faqs, questions, answers, knowledgebase
+Donate link: https://www.paypal.com/ncp/payment/P64UGJHU5MZVE
+Tags: faq, faqs, frequently asked questions, questions, answers, knowledgebase
 Requires at least: 3.5
-Tested up to: 4.1
+Tested up to: 6.9
 Stable tag: 0.3
-License: GPL2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Requires PHP: 7.4
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Simple management of Frequently Asked Questions (FAQ).
+Simple management of Frequently Asked Questions (FAQ) via post type and categories.
 
 == Description ==
 

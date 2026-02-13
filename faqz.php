@@ -3,11 +3,14 @@
 /*
 Plugin Name: FAQz
 Plugin URI: https://github.com/benhuson/FAQz
-Description: Simple management of Frequently Asked Questions (FAQ).
+Description: Simple management of Frequently Asked Questions (FAQ) via post type and categories.
 Version: 0.3
+Requires at least: 3.5
+Requires PHP: 7.4
 Author: Ben Huson
 Author URI: https://github.com/benhuson/
-License: GPL2
+License: GPLv2
+Text Domain: faqz
 */
 
 /*
@@ -26,6 +29,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+defined( 'ABSPATH' ) || exit;
 
 class FAQz {
 
@@ -64,19 +69,19 @@ class FAQz {
 
 		$args = array(
 			'labels'             => array(
-				'name'               => _x( 'FAQs', 'Post type general name', 'faq' ),
-				'singular_name'      => _x( 'FAQ', 'Post type singular name', 'faq' ),
-				'add_new'            => _x( 'Add New', 'book', 'faq' ),
-				'add_new_item'       => __( 'Add New FAQ', 'faq' ),
-				'edit_item'          => __( 'Edit FAQ', 'faq' ),
-				'new_item'           => __( 'New FAQ', 'faq' ),
-				'all_items'          => __( 'All FAQs', 'faq' ),
-				'view_item'          => __( 'View FAQ', 'faq' ),
-				'search_items'       => __( 'Search FAQs', 'faq' ),
-				'not_found'          => __( 'No FAQs found', 'faq' ),
-				'not_found_in_trash' => __( 'No FAQs found in Trash', 'faq' ), 
+				'name'               => _x( 'FAQs', 'Post type general name', 'faqz' ),
+				'singular_name'      => _x( 'FAQ', 'Post type singular name', 'faqz' ),
+				'add_new'            => _x( 'Add New', 'book', 'faqz' ),
+				'add_new_item'       => __( 'Add New FAQ', 'faqz' ),
+				'edit_item'          => __( 'Edit FAQ', 'faqz' ),
+				'new_item'           => __( 'New FAQ', 'faqz' ),
+				'all_items'          => __( 'All FAQs', 'faqz' ),
+				'view_item'          => __( 'View FAQ', 'faqz' ),
+				'search_items'       => __( 'Search FAQs', 'faqz' ),
+				'not_found'          => __( 'No FAQs found', 'faqz' ),
+				'not_found_in_trash' => __( 'No FAQs found in Trash', 'faqz' ), 
 				'parent_item_colon'  => '',
-				'menu_name'          => __( 'FAQs', 'faq' )
+				'menu_name'          => __( 'FAQs', 'faqz' )
 			),
 			'public'             => true,
 			'publicly_queryable' => true,
@@ -107,17 +112,17 @@ class FAQz {
 		$args = array(
 			'hierarchical'      => true,
 			'labels'            => array(
-				'name'              => _x( 'Categories', 'taxonomy general name' ),
-				'singular_name'     => _x( 'Category', 'taxonomy singular name' ),
-				'search_items'      => __( 'Search Categories' ),
-				'all_items'         => __( 'All Categories' ),
-				'parent_item'       => __( 'Parent Category' ),
-				'parent_item_colon' => __( 'Parent Category:' ),
-				'edit_item'         => __( 'Edit Category' ),
-				'update_item'       => __( 'Update Category' ),
-				'add_new_item'      => __( 'Add New Category' ),
-				'new_item_name'     => __( 'New Category Name' ),
-				'menu_name'         => __( 'Category' ),
+				'name'              => _x( 'Categories', 'taxonomy general name', 'faqz' ),
+				'singular_name'     => _x( 'Category', 'taxonomy singular name', 'faqz' ),
+				'search_items'      => __( 'Search Categories', 'faqz' ),
+				'all_items'         => __( 'All Categories', 'faqz' ),
+				'parent_item'       => __( 'Parent Category', 'faqz' ),
+				'parent_item_colon' => __( 'Parent Category:', 'faqz' ),
+				'edit_item'         => __( 'Edit Category', 'faqz' ),
+				'update_item'       => __( 'Update Category', 'faqz' ),
+				'add_new_item'      => __( 'Add New Category', 'faqz' ),
+				'new_item_name'     => __( 'New Category Name', 'faqz' ),
+				'menu_name'         => __( 'Category', 'faqz' ),
 			),
 			'public'            => true,
 			'show_ui'           => true,
@@ -145,18 +150,23 @@ class FAQz {
 
 		$messages['faqz'] = array(
 			0 => '', // Unused. Messages start at index 1.
+			/* translators: %s: link to view FAQ */
 			1 => sprintf( __( 'FAQ updated. <a href="%s">View FAQ</a>', 'faqz' ), esc_url( get_permalink( $post_ID ) ) ),
 			2 => __( 'Custom field updated.', 'faqz' ),
 			3 => __( 'Custom field deleted.', 'faqz' ),
 			4 => __( 'FAQ updated.', 'faqz' ),
 			/* translators: %s: date and time of the revision */
 			5 => isset( $_GET['revision'] ) ? sprintf( __( 'FAQ restored to revision from %s', 'faqz' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			/* translators: %s: link to view FAQ */
 			6 => sprintf( __( 'FAQ published. <a href="%s">View FAQ</a>', 'faqz' ), esc_url( get_permalink( $post_ID ) ) ),
-			7 => __( 'FAQ saved.', 'faq' ),
+			7 => __( 'FAQ saved.', 'faqz' ),
+			/* translators: %s: link to preview FAQ */
 			8 => sprintf( __( 'FAQ submitted. <a target="_blank" href="%s">Preview FAQ</a>', 'faqz' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+			/* translators: %1$s: scheduled publish date, %2$s: link to preview FAQ */
 			9 => sprintf( __( 'FAQ scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview FAQ</a>', 'faqz' ),
 			// translators: Publish box date format, see http://php.net/date
-			date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+			date_i18n( __( 'M j, Y @ G:i', 'faqz' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+			/* translators: %s: link to preview FAQ */
 			10 => sprintf( __( 'FAQ draft updated. <a target="_blank" href="%s">Preview FAQ</a>', 'faqz' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
 		);
 
@@ -219,10 +229,12 @@ class FAQz {
 		</div>
 		</form>';
 
+		$result = apply_filters( 'faqz_get_search_form', $form );
+
 		if ( $echo ) {
-			echo apply_filters( 'faqz_get_search_form', $form );
+			echo $result;
 		} else {
-			return apply_filters( 'faqz_get_search_form', $form );
+			return $result;
 		}
 
 	}

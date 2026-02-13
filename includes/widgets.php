@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * FAQz search widget class
  */
@@ -15,7 +17,7 @@ class FAQz_Widget_Search extends WP_Widget {
 			'description' => __( 'An FAQ search form', 'faqz' )
 		);
 
-		parent::__construct( 'faqz_search', __( 'FAQz Search', 'faqz' ), $widget_ops );
+		parent::__construct( 'faqz_search', __( 'FAQs Search', 'faqz' ), $widget_ops );
 
 	}
 
@@ -55,7 +57,7 @@ class FAQz_Widget_Search extends WP_Widget {
 
 		?>
 
-		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'faqz' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></label></p>
+		<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'faqz' ); ?> <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></label></p>
 
 		<?php
 
@@ -72,7 +74,7 @@ class FAQz_Widget_Search extends WP_Widget {
 
 		$instance = $old_instance;
 		$new_instance = wp_parse_args( (array) $new_instance, array( 'title' => '' ) );
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['title'] = wp_strip_all_tags( $new_instance['title'] );
 
 		return $instance;
 
