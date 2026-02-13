@@ -57,7 +57,6 @@ class FAQz {
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'template_redirect', array( $this, 'template_redirect' ) );
 		add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
-		add_filter( 'cmspo_post_types', array( $this, 'cmspo_post_types' ) );
 		add_shortcode( 'faqz', array( $this, 'shortcode_faqz' ) );
 
 	}
@@ -171,20 +170,6 @@ class FAQz {
 		);
 
 		return $messages;
-
-	}
-
-	/**
-	 * Support for CMS Page Order plugin
-	 * http://wordpress.org/extend/plugins/cms-page-order/
-	 *
-	 * @param   array  $post_types  Exisiting post type support.
-	 * @return  array               Updated post type support.
-	 */
-	function cmspo_post_types( $post_types ) {
-
-		$post_types[] = 'faqz';
-		return $post_types;
 
 	}
 
