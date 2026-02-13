@@ -5,7 +5,7 @@ Plugin Name: Frequently Asked Questions (FAQs)
 Plugin URI: https://github.com/benhuson/FAQz
 Description: Simple management of Frequently Asked Questions (FAQ) via post type and categories.
 Version: 1.0
-Requires at least: 3.5
+Requires at least: 4.7
 Requires PHP: 7.4
 Author: Ben Huson
 Author URI: https://github.com/benhuson/
@@ -99,7 +99,7 @@ class FAQz {
 			'supports'           => array( 'title', 'editor', 'author', 'page-attributes' )
 		);
 
-		register_post_type( 'faqz', apply_filters( 'faqz_register_post_type_args', $args ) );
+		register_post_type( $this->get_registered_post_type(), $args );
 
 	}
 
@@ -111,17 +111,17 @@ class FAQz {
 		$args = array(
 			'hierarchical'      => true,
 			'labels'            => array(
-				'name'              => _x( 'Categories', 'taxonomy general name', 'faqz' ),
-				'singular_name'     => _x( 'Category', 'taxonomy singular name', 'faqz' ),
-				'search_items'      => __( 'Search Categories', 'faqz' ),
-				'all_items'         => __( 'All Categories', 'faqz' ),
-				'parent_item'       => __( 'Parent Category', 'faqz' ),
-				'parent_item_colon' => __( 'Parent Category:', 'faqz' ),
-				'edit_item'         => __( 'Edit Category', 'faqz' ),
-				'update_item'       => __( 'Update Category', 'faqz' ),
-				'add_new_item'      => __( 'Add New Category', 'faqz' ),
-				'new_item_name'     => __( 'New Category Name', 'faqz' ),
-				'menu_name'         => __( 'Category', 'faqz' ),
+				'name'              => _x( 'FAQ Categories', 'taxonomy general name', 'faqz' ),
+				'singular_name'     => _x( 'FAQ Category', 'taxonomy singular name', 'faqz' ),
+				'search_items'      => __( 'Search FAQ Categories', 'faqz' ),
+				'all_items'         => __( 'All FAQ Categories', 'faqz' ),
+				'parent_item'       => __( 'Parent FAQ Category', 'faqz' ),
+				'parent_item_colon' => __( 'Parent FAQ Category:', 'faqz' ),
+				'edit_item'         => __( 'Edit FAQ Category', 'faqz' ),
+				'update_item'       => __( 'Update FAQ Category', 'faqz' ),
+				'add_new_item'      => __( 'Add New FAQ Category', 'faqz' ),
+				'new_item_name'     => __( 'New FAQ Category Name', 'faqz' ),
+				'menu_name'         => __( 'Categories', 'faqz' ),
 			),
 			'public'            => true,
 			'show_ui'           => true,
@@ -133,7 +133,7 @@ class FAQz {
 			),
 		);
 
-		register_taxonomy( 'faqz_category', array( 'faqz' ), apply_filters( 'faqz_register_taxonomy_args', $args ) );
+		register_taxonomy( $this->get_registered_taxonomy(), array( $this->get_registered_post_type() ), $args );
 
 	}
 
@@ -174,13 +174,35 @@ class FAQz {
 	}
 
 	/**
+	 * Get Registered Post Type
+	 *
+	 * @return  string
+	 */
+	public function get_registered_post_type() {
+
+		return sanitize_key( apply_filters( 'faqz_registered_post_type', 'faq' ) );
+
+	}
+
+	/**
+	 * Get Registered Taxonomy
+	 *
+	 * @return  string
+	 */
+	public function get_registered_taxonomy() {
+
+		return sanitize_key( apply_filters( 'faqz_registered_taxonomy', 'faq_category' ) );
+
+	}
+
+	/**
 	 * Template Redirect
 	 */
 	public function template_redirect() {
 
-		if ( is_search() && ( is_post_type_archive( 'faqz' ) || ( is_archive() && 'faqz' == get_post_type() ) ) ) {
+		if ( is_search() && ( is_post_type_archive( 'faq' ) || ( is_archive() && 'faq' == get_post_type() ) ) ) {
 
-			$search_template = locate_template( 'search-faqz.php' );
+			$search_template = locate_template( 'search-faq.php' );
 
 			if ( '' != $search_template ) {
 				require( $search_template );
@@ -201,8 +223,8 @@ class FAQz {
 
 		do_action( 'faqz_get_search_form' );
 
-		$search_form_template = locate_template( 'searchform-faqz.php' );
-		if ( '' != $search_form_template ) {
+		$search_form_template = locate_template( 'searchform-faq.php' );
+		if ( '' !== $search_form_template ) {
 			require( $search_form_template );
 			return;
 		}
@@ -257,7 +279,7 @@ class FAQz {
 			'faqz_before_item' => '<div class="faqz-faq">',
 			'faqz_after_item'  => '</div>'
 		) );
-		$args['post_type'] = 'faqz';
+		$args['post_type'] = $this->get_registered_post_type();
 
 		$faqs = '';
 		$faqs_query = new WP_Query( $args );
