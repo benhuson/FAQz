@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FAQs\n"
-"POT-Creation-Date: 2026-02-13 14:22+0000\n"
+"POT-Creation-Date: 2026-02-13 16:54+0000\n"
 "PO-Revision-Date: 2012-10-11 07:02-0000\n"
 "Last-Translator: Ben Huson <ben@thewhiteroom.net>\n"
 "Language-Team: <ben@thewhiteroom.net>\n"
@@ -18,151 +18,155 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../faqz.php:72 ../faqz.php:84
+#: ../faqz.php:71 ../faqz.php:83
 msgid "FAQs"
 msgstr ""
 
-#: ../faqz.php:73
+#: ../faqz.php:72
 msgid "FAQ"
 msgstr ""
 
-#: ../faqz.php:74
+#: ../faqz.php:73
 msgid "Add New"
 msgstr ""
 
-#: ../faqz.php:75
+#: ../faqz.php:74
 msgid "Add New FAQ"
 msgstr ""
 
-#: ../faqz.php:76
+#: ../faqz.php:75
 msgid "Edit FAQ"
 msgstr ""
 
-#: ../faqz.php:77
+#: ../faqz.php:76
 msgid "New FAQ"
 msgstr ""
 
-#: ../faqz.php:78
+#: ../faqz.php:77
 msgid "All FAQs"
 msgstr ""
 
-#: ../faqz.php:79
+#: ../faqz.php:78
 msgid "View FAQ"
 msgstr ""
 
-#: ../faqz.php:80
+#: ../faqz.php:79
 msgid "Search FAQs"
 msgstr ""
 
-#: ../faqz.php:81
+#: ../faqz.php:80
 msgid "No FAQs found"
 msgstr ""
 
-#: ../faqz.php:82
+#: ../faqz.php:81
 msgid "No FAQs found in Trash"
 msgstr ""
 
-#: ../faqz.php:92
-msgid "faqz"
+#: ../faqz.php:91
+msgid "faqs"
+msgstr ""
+
+#: ../faqz.php:114
+msgid "FAQ Categories"
 msgstr ""
 
 #: ../faqz.php:115
-msgid "Categories"
+msgid "FAQ Category"
 msgstr ""
 
-#: ../faqz.php:116 ../faqz.php:125
-msgid "Category"
+#: ../faqz.php:116
+msgid "Search FAQ Categories"
 msgstr ""
 
 #: ../faqz.php:117
-msgid "Search Categories"
+msgid "All FAQ Categories"
 msgstr ""
 
 #: ../faqz.php:118
-msgid "All Categories"
+msgid "Parent FAQ Category"
 msgstr ""
 
 #: ../faqz.php:119
-msgid "Parent Category"
+msgid "Parent FAQ Category:"
 msgstr ""
 
 #: ../faqz.php:120
-msgid "Parent Category:"
+msgid "Edit FAQ Category"
 msgstr ""
 
 #: ../faqz.php:121
-msgid "Edit Category"
+msgid "Update FAQ Category"
 msgstr ""
 
 #: ../faqz.php:122
-msgid "Update Category"
+msgid "Add New FAQ Category"
 msgstr ""
 
 #: ../faqz.php:123
-msgid "Add New Category"
+msgid "New FAQ Category Name"
 msgstr ""
 
 #: ../faqz.php:124
-msgid "New Category Name"
+msgid "Categories"
 msgstr ""
 
-#: ../faqz.php:154
+#: ../faqz.php:153
 #, php-format
 msgid "FAQ updated. <a href=\"%s\">View FAQ</a>"
 msgstr ""
 
-#: ../faqz.php:155
+#: ../faqz.php:154
 msgid "Custom field updated."
 msgstr ""
 
-#: ../faqz.php:156
+#: ../faqz.php:155
 msgid "Custom field deleted."
 msgstr ""
 
-#: ../faqz.php:157
+#: ../faqz.php:156
 msgid "FAQ updated."
 msgstr ""
 
-#: ../faqz.php:159
+#: ../faqz.php:158
 #, php-format
 msgid "FAQ restored to revision from %s"
 msgstr ""
 
-#: ../faqz.php:161
+#: ../faqz.php:160
 #, php-format
 msgid "FAQ published. <a href=\"%s\">View FAQ</a>"
 msgstr ""
 
-#: ../faqz.php:162
+#: ../faqz.php:161
 msgid "FAQ saved."
 msgstr ""
 
-#: ../faqz.php:164
+#: ../faqz.php:163
 #, php-format
 msgid "FAQ submitted. <a target=\"_blank\" href=\"%s\">Preview FAQ</a>"
 msgstr ""
 
-#: ../faqz.php:166
+#: ../faqz.php:165
 #, php-format
 msgid ""
 "FAQ scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" "
 "href=\"%2$s\">Preview FAQ</a>"
 msgstr ""
 
-#: ../faqz.php:168
+#: ../faqz.php:167
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: ../faqz.php:170
+#: ../faqz.php:169
 #, php-format
 msgid "FAQ draft updated. <a target=\"_blank\" href=\"%s\">Preview FAQ</a>"
 msgstr ""
 
-#: ../faqz.php:226
+#: ../faqz.php:233
 msgid "Search for:"
 msgstr ""
 
-#: ../faqz.php:228
+#: ../faqz.php:235
 msgid "Search"
 msgstr ""
 
