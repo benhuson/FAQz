@@ -1,7 +1,7 @@
 === Frequently Asked Questions (FAQs) ===
 Contributors: husobj
 Donate link: https://www.paypal.com/ncp/payment/P64UGJHU5MZVE
-Tags: faq, faqs, frequently asked questions, questions, answers, knowledgebase
+Tags: faq, faqs, questions, answers, knowledgebase
 Requires at least: 3.5
 Tested up to: 6.9
 Stable tag: 1.0
