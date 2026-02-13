@@ -57,7 +57,7 @@ class FAQz {
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'template_redirect', array( $this, 'template_redirect' ) );
 		add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
-		add_shortcode( 'faqz', array( $this, 'shortcode_faqz' ) );
+		add_shortcode( 'faqs', array( $this, 'shortcode_faqs' ) );
 
 	}
 
@@ -225,17 +225,15 @@ class FAQz {
 	}
 
 	/**
-	 * Shortcode: [faq /]
+	 * Shortcode: [faqs /]
 	 *
 	 * @param   array   $atts     Shortcode attributes.
 	 * @param   string  $content  Default content.
 	 * @return  string            Content.
 	 */
-	public function shortcode_faqz( $atts, $content = '' ) {
+	public function shortcode_faqs( $atts, $content = '', $shortcode_tag = '' ) {
 
-		$atts = wp_parse_args( $atts, array(
-			'faqz_context' => 'shortcode'
-		) );
+		$atts = wp_parse_args( $atts, array() );
 
 		return $content . $this->faqz_list( $atts );
 
@@ -254,7 +252,6 @@ class FAQz {
 			'posts_per_page'   => -1,
 			'orderby'          => 'menu_order',
 			'order'            => 'ASC',
-			'faqz_context'     => 'list',
 			'faqz_before'      => '<div class="faqz-faqs">',
 			'faqz_after'       => '</div>',
 			'faqz_before_item' => '<div class="faqz-faq">',
