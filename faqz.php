@@ -96,7 +96,7 @@ class FAQz {
 			'hierarchical'       => false,
 			'menu_position'      => null,
 			'menu_icon'          => 'dashicons-format-chat',
-			'supports'           => array( 'title', 'editor', 'author', 'excerpt' )
+			'supports'           => array( 'title', 'editor', 'author', 'page-attributes' )
 		);
 
 		register_post_type( 'faqz', apply_filters( 'faqz_register_post_type_args', $args ) );
