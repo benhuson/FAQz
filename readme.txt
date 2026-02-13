@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/ncp/payment/P64UGJHU5MZVE
 Tags: faq, faqs, frequently asked questions, questions, answers, knowledgebase
 Requires at least: 3.5
 Tested up to: 6.9
-Stable tag: 0.3
+Stable tag: 1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -39,6 +39,10 @@ This is just a first release. More to come...
 2. FAQ search widget
 
 == Changelog ==
+
+= 1.0 =
+* Rename to "Frequently Asked Questions (FAQs).
+* Fix plugin check notices.
 
 = 0.3 =
 * Make FAQz post type public by default.
