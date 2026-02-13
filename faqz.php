@@ -88,7 +88,7 @@ class FAQz {
 			'show_in_menu'       => true, 
 			'query_var'          => true,
 			'rewrite'            => array(
-				'slug'       => _x( 'faqz', 'Single URL slug', 'faqz' ),
+				'slug'       => _x( 'faqs', 'Single URL slug', 'faqz' ),
 				'with_front' => false
 			),
 			'capability_type'    => 'post',
@@ -128,7 +128,7 @@ class FAQz {
 			'show_admin_column' => true,
 			'query_var'         => true,
 			'rewrite'           => array(
-				'slug'       => 'faqz-category',
+				'slug'       => 'faq-category',
 				'with_front' => false
 			),
 		);
