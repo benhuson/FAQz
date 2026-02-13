@@ -13,7 +13,7 @@ class FAQz_Widget_Search extends WP_Widget {
 	public function __construct() {
 
 		$widget_ops = array(
-			'classname'   => 'faqz-widget-search',
+			'classname'   => 'faq-widget-search',
 			'description' => __( 'An FAQ search form', 'faqz' )
 		);
 

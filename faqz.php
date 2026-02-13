@@ -229,10 +229,10 @@ class FAQz {
 			return;
 		}
 
-		$form = '<form role="search" method="get" id="faqz-searchform" action="' . esc_url( get_post_type_archive_link( 'faqz' ) ) . '" >
-		<div><label class="screen-reader-text" for="faqz-s">' . __( 'Search for:', 'faqz' ) . '</label>
-		<input type="text" value="' . get_search_query() . '" name="s" id="faqz-s" />
-		<input type="submit" id="faqz-searchsubmit" value="'. esc_attr__( 'Search', 'faqz' ) .'" />
+		$form = '<form role="search" method="get" id="faq-searchform" class="faq-searchform" action="' . esc_url( get_post_type_archive_link( 'faq' ) ) . '" >
+		<div><label class="screen-reader-text" for="faq-searchform-s">' . __( 'Search for:', 'faqz' ) . '</label>
+		<input type="text" value="' . esc_attr( get_search_query() ) . '" name="s" id="faq-searchform-s" />
+		<input type="submit" id="faq-searchform-submit" value="'. esc_attr__( 'Search', 'faqz' ) .'" />
 		</div>
 		</form>';
 
@@ -274,9 +274,9 @@ class FAQz {
 			'posts_per_page'   => -1,
 			'orderby'          => 'menu_order',
 			'order'            => 'ASC',
-			'faqz_before'      => '<div class="faqz-faqs">',
+			'faqz_before'      => '<div class="faqs">',
 			'faqz_after'       => '</div>',
-			'faqz_before_item' => '<div class="faqz-faq">',
+			'faqz_before_item' => '<div class="faq">',
 			'faqz_after_item'  => '</div>'
 		) );
 		$args['post_type'] = $this->get_registered_post_type();
@@ -289,8 +289,8 @@ class FAQz {
 			while ( $faqs_query->have_posts() ) {
 				$faqs_query->the_post();
 
-				$faq = '<h3 class="faqz-question"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
-				$faq .= '<div class="faqz-answer">' . get_the_content() . '</div>';
+				$faq = '<h3 class="faq__question"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
+				$faq .= '<div class="faq__answer">' . get_the_content() . '</div>';
 				$faqs .= $args['faqz_before_item'] . apply_filters( 'faqz_loop', $faq, $args ) . $args['faqz_after_item'];
 
 			}
