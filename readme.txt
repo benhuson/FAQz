@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/ncp/payment/P64UGJHU5MZVE
 Tags: faq, faqs, questions, answers, knowledgebase
 Requires at least: 4.7
 Tested up to: 6.9
-Stable tag: 1.0
+Stable tag: 2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

@@ -4,7 +4,7 @@
 Plugin Name: Frequently Asked Questions (FAQs)
 Plugin URI: https://github.com/benhuson/FAQz
 Description: Simple management of Frequently Asked Questions (FAQ) via post type and categories.
-Version: 1.0
+Version: 2.0
 Requires at least: 4.7
 Requires PHP: 7.4
 Author: Ben Huson
